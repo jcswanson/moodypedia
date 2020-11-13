@@ -1,0 +1,9 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+-fx-font-family: Arial;
+  -fx-font-weight: bold;
+   -fx-background-color: linear-gradient(#ffc300, #900c3f);
+}

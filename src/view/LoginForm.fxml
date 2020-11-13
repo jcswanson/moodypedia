@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<SplitPane dividerPositions="0.7970401691331924" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="475.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AdminFormController">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="351.0" prefWidth="448.0">
+         <children>
+            <VBox layoutX="126.0" layoutY="137.0" spacing="35.0">
+               <children>
+                  <TextField fx:id="loginUnField" />
+                  <PasswordField fx:id="loginPwField" />
+                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLogin" prefHeight="25.0" prefWidth="156.0" text="Login" />
+               </children>
+            </VBox>
+            <VBox layoutX="58.0" layoutY="134.0" prefHeight="85.0" prefWidth="68.0" spacing="35.0">
+               <children>
+                  <Label text="Username:">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Password:">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+            <ImageView fx:id="loginLogo" fitHeight="85.0" fitWidth="247.0" layoutX="58.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@MPlogo1Lg.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="messageLabel" alignment="CENTER" layoutX="124.0" layoutY="300.0" prefHeight="20.0" prefWidth="156.0" textFill="#f50606" textOverrun="CLIP" underline="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Hyperlink fx:id="forogtPwLink" layoutX="58.0" layoutY="309.0" text="Forgot Password?" />
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="123.0" prefWidth="348.0">
+         <children>
+            <Button fx:id="loginSignupButton" layoutX="127.0" layoutY="47.0" mnemonicParsing="false" onAction="#displaySignupForm" prefHeight="25.0" prefWidth="156.0" text="Signup" />
+            <Label layoutX="109.0" layoutY="14.0" text="Don't Have an Account, Login Below" />
+         </children></AnchorPane>
+  </items>
+</SplitPane>
