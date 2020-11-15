@@ -8,6 +8,7 @@ package appFXML;
  * and open the template in the editor.
  */
 
+import controller.Controller;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -30,6 +31,9 @@ public class AppFX extends Application {
         
     }
     public static void main(String[] args) {
+//        Model model = new Model();
+//        view view = new View();
+//        Controller controller = new Controller(model, view);
         launch(args);
     }
 }

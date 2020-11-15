@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -105,14 +105,14 @@ public class MainFrameFXMLController implements Initializable {
         //go the account screen of the logged in user
          System.out.println("Account Button Clicked");
         
-        Parent mainFrameParent = FXMLLoader.load(getClass().getResource("Account.fxml"));
+        Parent mainFrameParent = FXMLLoader.load(getClass().getResource("/view/Account.fxml"));
         Scene scene = new Scene(mainFrameParent);
        
         // Get the stage information by casting the stage to a node
-        Stage mfWindow = (Stage)((Node)e.getSource()).getScene().getWindow();
+        Stage accountWindow = (Stage)((Node)e.getSource()).getScene().getWindow();
         
-        mfWindow.setScene(scene);
-        mfWindow.show();  
+        accountWindow.setScene(scene);
+        accountWindow.show();  
         //TODO
         
     }
@@ -121,7 +121,7 @@ public class MainFrameFXMLController implements Initializable {
       //go the account screen of the logged in user
        System.out.println("Mood color legend Button Clicked");
 
-      Parent mainFrameParent = FXMLLoader.load(getClass().getResource("MoodColorLegend.fxml"));
+      Parent mainFrameParent = FXMLLoader.load(getClass().getResource("/view/MoodColorLegend.fxml"));
       Scene scene = new Scene(mainFrameParent);
 
       // Get the stage information by casting the stage to a node

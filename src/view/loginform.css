@@ -2,6 +2,14 @@
  * Empty Stylesheet file.
  */
 
-.mainFxmlClass {
-
+.loginAnchorClass {
+  -fx-font-family: Arial;
+  -fx-font-weight: bold;
+   -fx-background-color: linear-gradient(#ffc300, #900c3f);
+    
+}
+.secondAnchor{
+    -fx-font-family: Arial;
+  -fx-font-weight: bold;
+  -fx-background-color: white;
 }

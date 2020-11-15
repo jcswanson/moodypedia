@@ -1,4 +1,4 @@
-package view;
+package controller;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,6 +21,7 @@ import controller.*;
 import controller.Controller;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -65,56 +66,7 @@ public class AdminFormController implements Initializable {
     private Hyperlink loginLink;
     
     //Account comoponets below
-    @FXML
-    private TitledPane accountTitle;
-    @FXML
-    private ImageView accountIcon;
-    @FXML
-    private Button saveButton;
-    @FXML
-    private Label accountInfoTitle;
-    @FXML
-    private Label fnLabel;
-    @FXML
-    private TextField fn;
-    @FXML
-    private Label lnLabel;
-    @FXML
-    private TextField ln;
-    @FXML
-    private Label unLabel;
-    @FXML
-    private TextField un;
-    @FXML
-    private Label pwLabel;
-    @FXML
-    private PasswordField pw;
-    @FXML
-    private Label emailLabel;
-    @FXML
-    private TextField email;
-    @FXML
-    private Label heightLabel;
-    @FXML
-    private TextField height;
-    @FXML
-    private Label weightLabel;
-    @FXML
-    private TextField accountWeight;
-    @FXML
-    private Label genderLabel;
-    @FXML
-    private TextField accountGender;
-    @FXML
-    private Label ageLabel;
-    @FXML
-    private TextField age;
-    @FXML
-    private Label accountUserInfoTitle;
-    @FXML
-    private ImageView accountLogo;
-    @FXML
-    private Button returnButton;
+   
     
     //login componets
     @FXML
@@ -129,16 +81,19 @@ public class AdminFormController implements Initializable {
     private ImageView loginLogo;
     @FXML
     private Button loginSignupButton;
-    @FXML 
+    @FXML
     private TitledPane title;
-    Model model;
-    Controller controller;
-  
-     @FXML 
+    
+    //App Data Access
+    private Model model;
+    private Controller controller;
+    private Account newUser;
+    
+    //Login to the mainframe
     public void handleLogin(ActionEvent e) throws IOException{
         System.out.println("Login Button Clicked");
         
-        Parent mainFrameParent = FXMLLoader.load(getClass().getResource("MainFrame.fxml"));
+        Parent mainFrameParent = FXMLLoader.load(getClass().getResource("/view/MainFrame.fxml"));
         Scene scene = new Scene(mainFrameParent);
        
         // Get the stage information by casting the stage to a node
@@ -158,8 +113,8 @@ public class AdminFormController implements Initializable {
 */      
     public void displaySignupForm(ActionEvent e) throws IOException{
         System.out.println("Signup Button Clicked");
-        
-        Parent mainFrameParent = FXMLLoader.load(getClass().getResource("SignupForm.fxml"));
+        newUser = new Account();
+        Parent mainFrameParent = FXMLLoader.load(getClass().getResource("/view/SignupForm.fxml"));
         Scene scene = new Scene(mainFrameParent);
        
         // Get the stage information by casting the stage to a node
@@ -169,9 +124,81 @@ public class AdminFormController implements Initializable {
         signupWindow.show();  
         
     }
-    public void registerUser(ActionEvent e){
-      System.out.println("signup time"); 
+    
+    public void displayAccount() {
+        //go the account screen of the logged in user
+      try {  
+        System.out.println("Account Button Clicked");
+        
+        Parent mainFrameParent = FXMLLoader.load(getClass().getResource("/view/Account.fxml"));
+        Scene scene = new Scene(mainFrameParent);
+       
+        // Get the stage information by casting the stage to a node
+        Stage accountWindow = new Stage();//(Stage)((Node)e.getSource()).getScene().getWindow();
+        
+        accountWindow.setScene(scene);
+        accountWindow.show();  
+      }
+      catch(Exception e){
+          e.printStackTrace();
+          e.getCause();
+      }
     }
+    
+    public void displayLogin(ActionEvent e) {
+      //go the account screen of the logged in user
+     try {
+      System.out.println("Login Link Clicked");
+
+      Parent mainFrameParent = FXMLLoader.load(getClass().getResource("/view/LoginForm.fxml"));
+      Scene scene = new Scene(mainFrameParent);
+
+      // Get the stage information by casting the stage to a node
+      Stage logForm = (Stage)((Node)e.getSource()).getScene().getWindow();
+
+      logForm.setScene(scene);
+      logForm.show();  
+     }
+     catch (Exception ex){
+         ex.printStackTrace();
+         ex.getCause();
+     }
+
+  }
+   
+    public void signupUser(ActionEvent e) {
+         newUser = new Account();
+        String fName = sendStringData(getFnTextField());
+        String lName = sendStringData(getLnTextField());
+        String email = sendStringData(getEmailTextField());
+        int age = sendIntData(getAgeTextField());
+        String height = sendStringData(getHtTextField());
+        int weight = sendIntData(getWgtTextField());
+        String gender = sendStringData(getGendTextField());
+        String username = sendStringData(getUsernTextField());
+        String pword1 = sendStringData(getPwTextfield1());
+        String pword2 = sendStringData(getPwTextfield2());
+        newUser = new Account(fName, lName, weight, height, gender, age, username, pword1, email); 
+        System.out.println(newUser.toString());
+ //--------------TROUBLE ADDING newUser TO ACCOUNTLIST-----------------------//
+ //       getModel().getAccountList().getAccountList().add(newUser);
+        System.out.println("Account updated");
+        //check if passwords are equal
+        if(pword1.equals(pword2)){
+          
+           
+       //-------------SEND VIEW TO ACCOUNT----------//    
+             displayAccount();
+           
+        }else{
+            //set pw fields to blank again
+            pwTextfield1.setText("");
+            pwTextfield2.setText("");
+        }
+       
+
+    }
+
     //collect String data from text fields
     public String sendStringData(TextField object){
          System.out.println("signup time");
@@ -184,17 +211,11 @@ public class AdminFormController implements Initializable {
         int num = Integer.parseInt(str);
         return num;
     }
-    
-    public void signupUser(ActionEvent e){
-        System.out.println("Account updated");
-        Account newUser = new Account();
-        newUser.setFirstName(sendStringData(getFnTextField()));
-        newUser.setLastName(sendStringData(getLnTextField()));
-        newUser.setEmail(sendStringData(getEmailTextField()));
-        newUser.setGender(sendStringData(getGendTextField()));
+    //convert int to string
+    public String intToStr(int num){
+        String str = "" + num;
+        return str;
     }
-
-    
 
     /**
      * Initializes the controller class.
@@ -372,356 +393,7 @@ public class AdminFormController implements Initializable {
         this.loginLink = loginLink;
     }
 
-    /**
-     * @return the accountTitle
-     */
-    public TitledPane getAccountTitle() {
-        return accountTitle;
-    }
-
-    /**
-     * @param accountTitle the accountTitle to set
-     */
-    public void setAccountTitle(TitledPane accountTitle) {
-        this.accountTitle = accountTitle;
-    }
-
-    /**
-     * @return the accountIcon
-     */
-    public ImageView getAccountIcon() {
-        return accountIcon;
-    }
-
-    /**
-     * @param accountIcon the accountIcon to set
-     */
-    public void setAccountIcon(ImageView accountIcon) {
-        this.accountIcon = accountIcon;
-    }
-
-    /**
-     * @return the saveButton
-     */
-    public Button getSaveButton() {
-        return saveButton;
-    }
-
-    /**
-     * @param saveButton the saveButton to set
-     */
-    public void setSaveButton(Button saveButton) {
-        this.saveButton = saveButton;
-    }
-
-    /**
-     * @return the accountInfoTitle
-     */
-    public Label getAccountInfoTitle() {
-        return accountInfoTitle;
-    }
-
-    /**
-     * @param accountInfoTitle the accountInfoTitle to set
-     */
-    public void setAccountInfoTitle(Label accountInfoTitle) {
-        this.accountInfoTitle = accountInfoTitle;
-    }
-
-    /**
-     * @return the fnLabel
-     */
-    public Label getFnLabel() {
-        return fnLabel;
-    }
-
-    /**
-     * @param fnLabel the fnLabel to set
-     */
-    public void setFnLabel(Label fnLabel) {
-        this.fnLabel = fnLabel;
-    }
-
-    /**
-     * @return the fn
-     */
-    public TextField getFn() {
-        return fn;
-    }
-
-    /**
-     * @param fn the fn to set
-     */
-    public void setFn(TextField fn) {
-        this.fn = fn;
-    }
-
-    /**
-     * @return the lnLabel
-     */
-    public Label getLnLabel() {
-        return lnLabel;
-    }
-
-    /**
-     * @param lnLabel the lnLabel to set
-     */
-    public void setLnLabel(Label lnLabel) {
-        this.lnLabel = lnLabel;
-    }
-
-    /**
-     * @return the ln
-     */
-    public TextField getLn() {
-        return ln;
-    }
-
-    /**
-     * @param ln the ln to set
-     */
-    public void setLn(TextField ln) {
-        this.ln = ln;
-    }
-
-    /**
-     * @return the unLabel
-     */
-    public Label getUnLabel() {
-        return unLabel;
-    }
-
-    /**
-     * @param unLabel the unLabel to set
-     */
-    public void setUnLabel(Label unLabel) {
-        this.unLabel = unLabel;
-    }
-
-    /**
-     * @return the un
-     */
-    public TextField getUn() {
-        return un;
-    }
-
-    /**
-     * @param un the un to set
-     */
-    public void setUn(TextField un) {
-        this.un = un;
-    }
-
-    /**
-     * @return the pwLabel
-     */
-    public Label getPwLabel() {
-        return pwLabel;
-    }
-
-    /**
-     * @param pwLabel the pwLabel to set
-     */
-    public void setPwLabel(Label pwLabel) {
-        this.pwLabel = pwLabel;
-    }
-
-    /**
-     * @return the pw
-     */
-    public PasswordField getPw() {
-        return pw;
-    }
-
-    /**
-     * @param pw the pw to set
-     */
-    public void setPw(PasswordField pw) {
-        this.pw = pw;
-    }
-
-    /**
-     * @return the emailLabel
-     */
-    public Label getEmailLabel() {
-        return emailLabel;
-    }
-
-    /**
-     * @param emailLabel the emailLabel to set
-     */
-    public void setEmailLabel(Label emailLabel) {
-        this.emailLabel = emailLabel;
-    }
-
-    /**
-     * @return the email
-     */
-    public TextField getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(TextField email) {
-        this.email = email;
-    }
-
-    /**
-     * @return the heightLabel
-     */
-    public Label getHeightLabel() {
-        return heightLabel;
-    }
-
-    /**
-     * @param heightLabel the heightLabel to set
-     */
-    public void setHeightLabel(Label heightLabel) {
-        this.heightLabel = heightLabel;
-    }
-
-    /**
-     * @return the height
-     */
-    public TextField getHeight() {
-        return height;
-    }
-
-    /**
-     * @param height the height to set
-     */
-    public void setHeight(TextField height) {
-        this.height = height;
-    }
-
-    /**
-     * @return the weightLabel
-     */
-    public Label getWeightLabel() {
-        return weightLabel;
-    }
-
-    /**
-     * @param weightLabel the weightLabel to set
-     */
-    public void setWeightLabel(Label weightLabel) {
-        this.weightLabel = weightLabel;
-    }
-
-    /**
-     * @return the accountWeight
-     */
-    public TextField getAccountWeight() {
-        return accountWeight;
-    }
-
-    /**
-     * @param accountWeight the accountWeight to set
-     */
-    public void setAccountWeight(TextField accountWeight) {
-        this.accountWeight = accountWeight;
-    }
-
-    /**
-     * @return the genderLabel
-     */
-    public Label getGenderLabel() {
-        return genderLabel;
-    }
-
-    /**
-     * @param genderLabel the genderLabel to set
-     */
-    public void setGenderLabel(Label genderLabel) {
-        this.genderLabel = genderLabel;
-    }
-
-    /**
-     * @return the accountGender
-     */
-    public TextField getAccountGender() {
-        return accountGender;
-    }
-
-    /**
-     * @param accountGender the accountGender to set
-     */
-    public void setAccountGender(TextField accountGender) {
-        this.accountGender = accountGender;
-    }
-
-    /**
-     * @return the ageLabel
-     */
-    public Label getAgeLabel() {
-        return ageLabel;
-    }
-
-    /**
-     * @param ageLabel the ageLabel to set
-     */
-    public void setAgeLabel(Label ageLabel) {
-        this.ageLabel = ageLabel;
-    }
-
-    /**
-     * @return the age
-     */
-    public TextField getAge() {
-        return age;
-    }
-
-    /**
-     * @param age the age to set
-     */
-    public void setAge(TextField age) {
-        this.age = age;
-    }
-
-    /**
-     * @return the accountUserInfoTitle
-     */
-    public Label getAccountUserInfoTitle() {
-        return accountUserInfoTitle;
-    }
-
-    /**
-     * @param accountUserInfoTitle the accountUserInfoTitle to set
-     */
-    public void setAccountUserInfoTitle(Label accountUserInfoTitle) {
-        this.accountUserInfoTitle = accountUserInfoTitle;
-    }
-
-    /**
-     * @return the accountLogo
-     */
-    public ImageView getAccountLogo() {
-        return accountLogo;
-    }
-
-    /**
-     * @param accountLogo the accountLogo to set
-     */
-    public void setAccountLogo(ImageView accountLogo) {
-        this.accountLogo = accountLogo;
-    }
-
-    /**
-     * @return the returnButton
-     */
-    public Button getReturnButton() {
-        return returnButton;
-    }
-
-    /**
-     * @param returnButton the returnButton to set
-     */
-    public void setReturnButton(Button returnButton) {
-        this.returnButton = returnButton;
-    }
-
+   
     /**
      * @return the messageLabel
      */
@@ -818,6 +490,22 @@ public class AdminFormController implements Initializable {
      */
     public void setTitle(TitledPane title) {
         this.title = title;
+    }
+
+    public Account getNewUser() {
+        return newUser;
+    }
+
+    public void setNewUser(Account newUser) {
+        this.newUser = newUser;
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
+    public Controller getController() {
+        return controller;
     }
 }
 

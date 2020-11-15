@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" onMouseDragOver="#displayMCLegend" prefHeight="422.0" prefWidth="592.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainFrameFXMLController">
+<AnchorPane id="AnchorPane" onMouseDragOver="#displayMCLegend" prefHeight="422.0" prefWidth="592.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainFrameFXMLController">
     <stylesheets>
         <URL value="@moodcolorlegend.css" />
     </stylesheets>

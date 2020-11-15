@@ -5,7 +5,7 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,9 +13,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.7970401691331924" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="475.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AdminFormController">
-  <items>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="351.0" prefWidth="448.0">
+
+<AnchorPane id="anchor" prefHeight="498.0" prefWidth="424.0" styleClass="loginAnchorClass" stylesheets="@loginform.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminFormController">
+   <children>
+    <AnchorPane layoutX="43.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="468.0" prefWidth="339.0" styleClass="secondAnchor" stylesheets="@loginform.css">
          <children>
             <VBox layoutX="126.0" layoutY="137.0" spacing="35.0">
                <children>
@@ -49,11 +50,10 @@
                </font>
             </Label>
             <Hyperlink fx:id="forogtPwLink" layoutX="58.0" layoutY="309.0" text="Forgot Password?" />
-         </children></AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="123.0" prefWidth="348.0">
-         <children>
-            <Button fx:id="loginSignupButton" layoutX="127.0" layoutY="47.0" mnemonicParsing="false" onAction="#displaySignupForm" prefHeight="25.0" prefWidth="156.0" text="Signup" />
-            <Label layoutX="109.0" layoutY="14.0" text="Don't Have an Account, Login Below" />
-         </children></AnchorPane>
-  </items>
-</SplitPane>
+            <Button fx:id="loginSignupButton" layoutX="124.0" layoutY="407.0" mnemonicParsing="false" onAction="#displaySignupForm" prefHeight="25.0" prefWidth="156.0" text="Signup" />
+            <Label layoutX="58.0" layoutY="361.0" text="Don't Have an Account, Login Below" />
+            <Separator layoutX="39.0" layoutY="344.0" prefHeight="3.0" prefWidth="264.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
