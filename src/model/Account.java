@@ -8,6 +8,8 @@ IST 261 Assignment:
 
 package model;
 
+import java.util.logging.Logger;
+
 public class Account extends User{
 // Instance Variables -- define your private data
 private String username;
@@ -56,5 +58,6 @@ public Account(){
     public void setEmail(String email) {
         this.email = email;
     }
+    private static final Logger LOG = Logger.getLogger(Account.class.getName());
 
 }

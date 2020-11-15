@@ -13,4 +13,7 @@ and open the template in the editor.
    -fx-background-color: white;
   
 }
+.signupFormBg {
+      -fx-background-color: linear-gradient(#ffc300, #900c3f);
+}
 

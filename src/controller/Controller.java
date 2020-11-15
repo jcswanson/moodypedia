@@ -8,16 +8,24 @@ IST 261 Assignment:
 
 package controller;
 
+import model.Model;
+
 public class Controller{
 // Instance Variables -- define your private data
+Model model;
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
 
 
 // Constructors
-public Controller(int d){
-// initialize default values
-
-}
-public Controller(){
+public Controller(Model model){
+    this.model = model;
 }
 
 }

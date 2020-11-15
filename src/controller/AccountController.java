@@ -4,31 +4,39 @@ Short description:
 IST 261 Assignment:
 @author jcswa
 @version 1.01 Nov 14, 2020
-*/
-
+ */
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+import model.Account;
+import model.Model;
 
 public class AccountController implements Initializable {
+
     /**
      * Initializes the controller class.
+     *
      * @param url
      */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
- @FXML
+    private Account newAccount;
+
+    @FXML
     private TitledPane accountTitle;
     @FXML
     private ImageView accountIcon;
@@ -78,21 +86,90 @@ public class AccountController implements Initializable {
     private ImageView accountLogo;
     @FXML
     private Button returnButton;
-    
-    public void setAccountField(String str){
+
+    private Model model;
+    private AdminFormController afc;
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }
+
+    public void addNewUser(Account newAcc) {
+        //assign new user
+        newAccount = newAcc;
+        //populate Signup form info to Account form
+        fn.setText(newAccount.getFirstName());
+        ln.setText(newAccount.getLastName());
+        email.setText(newAccount.getEmail());
+        un.setText(newAccount.getUsername());
+        height.setText(newAccount.getHeight());
+        pw.setText(newAccount.getPassword());
+        age.setText(Integer.toString(newAccount.getAge()));
+        accountWeight.setText(Integer.toString(newAccount.getWeight()));
+        accountGender.setText(newAccount.getGender());
+
+    }
+
+    public void saveAccountData() {
+        // get textfield ints and strings set newAccount fields
+
+        newAccount.setFirstName(getFn().getText());
+        newAccount.setLastName(getLn().getText());
+        newAccount.setEmail(getEmail().getText());
+        int age = sendIntData(getAge());
+        newAccount.setAge(age);
+        newAccount.setHeight(getHeight().getText());
+        int wgt = sendIntData(getAccountWeight());
+        newAccount.setWeight(wgt);
+        newAccount.setGender(getAccountGender().getText());
+        newAccount.setUsername(getUn().getText());
+        newAccount.setPassword(getPw().getText());
+        //setTextfields in account view
+        addNewUser(newAccount);
+        getModel().getAccountList().getAccountList().add(newAccount);
+   
+    } //-------------------RETURN BUTTON METHOD---------------------------//
+
+
+    public void returnToMainFrame(ActionEvent e) throws IOException {
+        System.out.println("Return to MainFrame");
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/view/MainFrame.fxml"));
+        Parent mf = loader.load();
+        Scene scene = new Scene(mf);
+        // Get the stage information by casting the stage to a node
+        Stage mfWindow = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        mfWindow.setScene(scene);
+        mfWindow.show();
+    }
+
+    //collect String data from text fields
+    public String sendStringData(TextField object) {
+        System.out.println("signup time");
+        String str = object.getText();
+        return str;
+    }
+
+    // collect int data from TextFields
+    public int sendIntData(TextField number) {
+        String str = number.getText();
+        int num = Integer.parseInt(str);
+        return num;
+    }
+
+    //convert int to string
+    public String intToStr(int num) {
+        String str = "" + num;
+        return str;
+    }
+
+    public void setAccountField(String str) {
         fn.setText(str);
     }
-//            fn.setText(fName);
-//            ln.setText(newUser.getLastName());
-//            email.setText(newUser.getEmail());
-//            height.setText(newUser.getHeight());
-//            accountWeight.setText(intToStr(newUser.getWeight()));
-//            accountGender.setText(newUser.getGender());
-//            age.setText(""+ intToStr(newUser.getAge()));
-//            un.setText(newUser.getUsername());
-//            pw.setText(newUser.getPassword());
-//            displayAccount();
- /**
+
+    /**
      * @return the accountTitle
      */
     public TitledPane getAccountTitle() {
@@ -442,5 +519,15 @@ public class AccountController implements Initializable {
         this.returnButton = returnButton;
     }
 
-}
+    public Account getNewAccount() {
+        return newAccount;
+    }
 
+    public Model getModel() {
+        return model;
+    }
+
+    public AdminFormController getAfc() {
+        return afc;
+    }
+}

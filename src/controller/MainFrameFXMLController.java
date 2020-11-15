@@ -113,6 +113,19 @@ public class MainFrameFXMLController implements Initializable {
         
         accountWindow.setScene(scene);
         accountWindow.show();  
+//         FXMLLoader loader = new FXMLLoader();
+//        loader.setLocation(getClass().getResource("/view/Account.fxml"));
+//        Parent signupForm = loader.load();
+//        
+//        Scene accountDataView = new Scene(signupForm);
+//        Stage stage = new Stage();
+//        stage.setScene(accountDataView);
+//        //access Account Controller and send signup data to Textfields
+//        
+//        AccountController accControl = loader.getController();
+//        accControl.saveAccountData();
+//        stage.show();
+//        
         //TODO
         
     }

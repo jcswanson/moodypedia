@@ -29,6 +29,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -39,7 +40,7 @@ import javafx.stage.Stage;
  */
 public class AdminFormController implements Initializable {
 
-    //signup componets
+    //signup components
     @FXML
     private TextField lnTextField;
     @FXML
@@ -54,6 +55,7 @@ public class AdminFormController implements Initializable {
     private TextField wgtTextField;
     @FXML
     private TextField gendTextField;
+    
     @FXML
     private PasswordField pwTextfield1;
     @FXML
@@ -64,11 +66,8 @@ public class AdminFormController implements Initializable {
     private Button signupButton;
     @FXML
     private Hyperlink loginLink;
-    
-    //Account comoponets below
-   
-    
-    //login componets
+ 
+    //login components
     @FXML
     private Label messageLabel;
     @FXML
@@ -88,8 +87,14 @@ public class AdminFormController implements Initializable {
     private Model model;
     private Controller controller;
     private Account newUser;
-    
-    //Login to the mainframe
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+       //------THE ANSWER LIES HERE I THINK------//
+    }    
+//-------------------------INITIAL SCREEN AFTER LOGGING IN-------------------------------------//
     public void handleLogin(ActionEvent e) throws IOException{
         System.out.println("Login Button Clicked");
         
@@ -110,7 +115,9 @@ public class AdminFormController implements Initializable {
             loginUnField.setText("");
         }
     }
-*/      
+*/    
+    //--------------------------DISPLAY SIGNUP FORM------------------------------------------//
+    
     public void displaySignupForm(ActionEvent e) throws IOException{
         System.out.println("Signup Button Clicked");
         newUser = new Account();
@@ -124,7 +131,7 @@ public class AdminFormController implements Initializable {
         signupWindow.show();  
         
     }
-    
+   //---------------------------------DISPLAY ACCOUNT VIEW ------------------------------// 
     public void displayAccount() {
         //go the account screen of the logged in user
       try {  
@@ -144,7 +151,7 @@ public class AdminFormController implements Initializable {
           e.getCause();
       }
     }
-    
+    //-----------------------------LOGIN DISPLAY---------------------------//
     public void displayLogin(ActionEvent e) {
       //go the account screen of the logged in user
      try {
@@ -163,10 +170,29 @@ public class AdminFormController implements Initializable {
          ex.printStackTrace();
          ex.getCause();
      }
-
+    }
+     //------------------ SENDING USER TO ACCOUNT ------------------//
+    public void sendUserToAccountList(ActionEvent e) throws IOException{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/view/Account.fxml"));
+        Parent signupForm = loader.load();
+        
+        Scene accountDataView = new Scene(signupForm);
+        Stage stage = new Stage();
+        stage.setScene(accountDataView);
+        //access Account Controller and send signup data to Textfields
+        AccountController accControl = loader.getController();
+        accControl.addNewUser(signupUser());
+        //set textfields in account
+       // accControl.saveAccountData(signupUser());
+        //show account
+        stage.show();
+        
   }
    
-    public void signupUser(ActionEvent e) {
+    
+  //-------------------CREATE A NEW ACCOUNT-----------------------// 
+    public Account signupUser() {
          newUser = new Account();
         String fName = sendStringData(getFnTextField());
         String lName = sendStringData(getLnTextField());
@@ -178,26 +204,27 @@ public class AdminFormController implements Initializable {
         String username = sendStringData(getUsernTextField());
         String pword1 = sendStringData(getPwTextfield1());
         String pword2 = sendStringData(getPwTextfield2());
-        newUser = new Account(fName, lName, weight, height, gender, age, username, pword1, email); 
-        System.out.println(newUser.toString());
+       
  //--------------TROUBLE ADDING newUser TO ACCOUNTLIST-----------------------//
  //       getModel().getAccountList().getAccountList().add(newUser);
         System.out.println("Account updated");
         //check if passwords are equal
-        if(pword1.equals(pword2)){
-          
+//        if(pword1.equals(pword2)){
+            
+            newUser = new Account(fName, lName, weight, height, gender, age, username, pword1, email); 
+            System.out.println(newUser.toString());
            
        //-------------SEND VIEW TO ACCOUNT----------//    
-             displayAccount();
-           
-        }else{
-            //set pw fields to blank again
-            pwTextfield1.setText("");
-            pwTextfield2.setText("");
+//             displayAccount();
+             return newUser;
+//        }else{
+//            //set pw fields to blank again
+//            pwTextfield1.setText("");
+//            pwTextfield2.setText("");
         }
-       
-
-    }
+     
+ 
+    
 
     //collect String data from text fields
     public String sendStringData(TextField object){
@@ -217,13 +244,7 @@ public class AdminFormController implements Initializable {
         return str;
     }
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    
    
      /**
      * @return the lnTextField

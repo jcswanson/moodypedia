@@ -7,6 +7,8 @@ IST 261 Assignment:
  */
 package model;
 
+import java.util.logging.Logger;
+
 public class User {
 // Instance Variables -- define your private data
 
@@ -84,5 +86,6 @@ public class User {
     public void setAge(int age) {
         this.age = age;
     }
+    private static final Logger LOG = Logger.getLogger(User.class.getName());
 
 }

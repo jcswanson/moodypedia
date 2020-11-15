@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.Model;
 /**
  *
  * @author jcswa
@@ -31,9 +32,8 @@ public class AppFX extends Application {
         
     }
     public static void main(String[] args) {
-//        Model model = new Model();
-//        view view = new View();
-//        Controller controller = new Controller(model, view);
+        Model model = new Model();
+        Controller controller = new Controller(model);
         launch(args);
     }
 }

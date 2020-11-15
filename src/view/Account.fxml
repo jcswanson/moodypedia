@@ -20,7 +20,7 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="460.0" prefWidth="534.0">
                <children>
-                  <Button fx:id="saveButton" layoutX="455.0" layoutY="405.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="91.0" text="Save" />
+                  <Button fx:id="saveButton" layoutX="455.0" layoutY="405.0" mnemonicParsing="false" onAction="#saveAccountData" prefHeight="41.0" prefWidth="91.0" text="Save" />
                   <Label fx:id="accountInfoTitle" layoutX="28.0" layoutY="79.0" prefHeight="40.0" prefWidth="240.0" text="Account Information" underline="true">
                      <font>
                         <Font name="Calibri" size="19.0" />
@@ -54,7 +54,7 @@
                         <Image url="@MPLOGONEW2..jpg" />
                      </image>
                   </ImageView>
-                  <Button fx:id="returnButton" layoutX="12.0" layoutY="26.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="158.0" text="&lt;- Return To Home" />
+                  <Button fx:id="returnButton" layoutX="12.0" layoutY="26.0" mnemonicParsing="false" onAction="#returnToMainFrame" prefHeight="27.0" prefWidth="158.0" text="&lt;- Return To Home" />
                </children>
             </AnchorPane>
         </content>
