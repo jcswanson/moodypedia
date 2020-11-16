@@ -93,6 +93,7 @@ public class AdminFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        //------THE ANSWER LIES HERE I THINK------//
+       model = new Model();
     }    
 //-------------------------INITIAL SCREEN AFTER LOGGING IN-------------------------------------//
     public void handleLogin(ActionEvent e) throws IOException{
@@ -204,14 +205,14 @@ public class AdminFormController implements Initializable {
         String username = sendStringData(getUsernTextField());
         String pword1 = sendStringData(getPwTextfield1());
         String pword2 = sendStringData(getPwTextfield2());
-       
+         newUser = new Account(fName, lName, weight, height, gender, age, username, pword1, email); 
  //--------------TROUBLE ADDING newUser TO ACCOUNTLIST-----------------------//
- //       getModel().getAccountList().getAccountList().add(newUser);
+       model.getAccountList().getAccountList().add(newUser);
         System.out.println("Account updated");
         //check if passwords are equal
 //        if(pword1.equals(pword2)){
             
-            newUser = new Account(fName, lName, weight, height, gender, age, username, pword1, email); 
+          
             System.out.println(newUser.toString());
            
        //-------------SEND VIEW TO ACCOUNT----------//    

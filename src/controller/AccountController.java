@@ -92,7 +92,12 @@ public class AccountController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        model = new Model();
+        
+        newAccount = new Account();
+        
+        addNewUser(model.getAccountList().getAccountList().get(3));
+        saveAccountData();
     }
 
     public void addNewUser(Account newAcc) {
@@ -108,6 +113,8 @@ public class AccountController implements Initializable {
         age.setText(Integer.toString(newAccount.getAge()));
         accountWeight.setText(Integer.toString(newAccount.getWeight()));
         accountGender.setText(newAccount.getGender());
+        model.getAccountList().getAccountList().add(model.getAccountList().getAccountList().size(), newAcc);
+        System.out.println();
 
     }
 

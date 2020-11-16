@@ -21,10 +21,12 @@ public AccountList(){
         Account john = new Account("John", "Swanson", 300, "6'3","M",35, "test", "test", "test@test.com");
         Account steven = new Account("Steven", "Roxberry", 180, "5'11","M",21, "test2", "test", "test2@test.com");
         Account nina = new Account("Nina", "Sudheesh", 110, "5'1","F", 20,"test3","test", "test3@test.com");
-        
+        Account newUser = new Account();
+        newUser.setFirstName("Bob");
         accountList.add(nina);
         accountList.add(john);
         accountList.add(steven);
+        accountList.add(newUser);
 }
 
     public ArrayList<Account> getAccountList() {
