@@ -5,8 +5,6 @@ package controller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -33,6 +31,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
 /**
  * FXML Controller class
  *
@@ -55,7 +54,7 @@ public class AdminFormController implements Initializable {
     private TextField wgtTextField;
     @FXML
     private TextField gendTextField;
-    
+
     @FXML
     private PasswordField pwTextfield1;
     @FXML
@@ -66,7 +65,7 @@ public class AdminFormController implements Initializable {
     private Button signupButton;
     @FXML
     private Hyperlink loginLink;
- 
+
     //login components
     @FXML
     private Label messageLabel;
@@ -82,104 +81,103 @@ public class AdminFormController implements Initializable {
     private Button loginSignupButton;
     @FXML
     private TitledPane title;
-    
+
     //App Data Access
     private Model model;
     private Controller controller;
     private Account newUser;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       //------THE ANSWER LIES HERE I THINK------//
-       model = new Model();
-       
-    }    
+        //------THE ANSWER LIES HERE I THINK------//
+        model = new Model();
+
+    }
 //-------------------------INITIAL SCREEN AFTER LOGGING IN-------------------------------------//
-    public void handleLogin(ActionEvent e) throws IOException{
+
+    public void handleLogin(ActionEvent e) throws IOException {
         System.out.println("Login Button Clicked");
-        
+
         Parent mainFrameParent = FXMLLoader.load(getClass().getResource("/view/MainFrame.fxml"));
         Scene scene = new Scene(mainFrameParent);
-       
-        // Get the stage information by casting the stage to a node
-        Stage mfWindow = (Stage)((Node)e.getSource()).getScene().getWindow();
-        
-        mfWindow.setScene(scene);
-       
-    
 
-        if(model.confirmLogin(loginPwField.getText(), loginUnField.getText())){
-             mfWindow.show();  
-        }else{
+        if (model.confirmLogin(loginPwField.getText(), loginUnField.getText())) {
+            // Get the stage information by casting the stage to a node
+            Stage mfWindow = (Stage) ((Node) e.getSource()).getScene().getWindow();
+
+            mfWindow.setScene(scene);
+            mfWindow.show();
+        } else {
             messageLabel.setText("Sorry, Invalid Credentials!");
             loginPwField.setText("");
             loginUnField.setText("");
         }
     }
- 
+
     //--------------------------DISPLAY SIGNUP FORM------------------------------------------//
-    
-    public void displaySignupForm(ActionEvent e) throws IOException{
+    public void displaySignupForm(ActionEvent e) throws IOException {
         System.out.println("Signup Button Clicked");
         newUser = new Account();
         Parent mainFrameParent = FXMLLoader.load(getClass().getResource("/view/SignupForm.fxml"));
         Scene scene = new Scene(mainFrameParent);
-       
+
         // Get the stage information by casting the stage to a node
-        Stage signupWindow = (Stage)((Node)e.getSource()).getScene().getWindow();
-        
+        Stage signupWindow = (Stage) ((Node) e.getSource()).getScene().getWindow();
+
         signupWindow.setScene(scene);
-        signupWindow.show();  
-        
+        signupWindow.show();
+
     }
-   //---------------------------------DISPLAY ACCOUNT VIEW ------------------------------// 
+    //---------------------------------DISPLAY ACCOUNT VIEW ------------------------------// 
+
     public void displayAccount() {
         //go the account screen of the logged in user
-      try {  
-        System.out.println("Account Button Clicked");
-        
-        Parent mainFrameParent = FXMLLoader.load(getClass().getResource("/view/Account.fxml"));
-        Scene scene = new Scene(mainFrameParent);
-       
-        // Get the stage information by casting the stage to a node
-        Stage accountWindow = new Stage();//(Stage)((Node)e.getSource()).getScene().getWindow();
-        
-        accountWindow.setScene(scene);
-        accountWindow.show();  
-      }
-      catch(Exception e){
-          e.printStackTrace();
-          e.getCause();
-      }
+        try {
+            System.out.println("Account Button Clicked");
+
+            Parent mainFrameParent = FXMLLoader.load(getClass().getResource("/view/Account.fxml"));
+            Scene scene = new Scene(mainFrameParent);
+
+            // Get the stage information by casting the stage to a node
+            Stage accountWindow = new Stage();//(Stage)((Node)e.getSource()).getScene().getWindow();
+
+            accountWindow.setScene(scene);
+            accountWindow.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
     }
+
     //-----------------------------LOGIN DISPLAY---------------------------//
     public void displayLogin(ActionEvent e) {
-      //go the account screen of the logged in user
-     try {
-      System.out.println("Login Link Clicked");
+        //go the account screen of the logged in user
+        try {
+            System.out.println("Login Link Clicked");
 
-      Parent mainFrameParent = FXMLLoader.load(getClass().getResource("/view/LoginForm.fxml"));
-      Scene scene = new Scene(mainFrameParent);
+            Parent mainFrameParent = FXMLLoader.load(getClass().getResource("/view/LoginForm.fxml"));
+            Scene scene = new Scene(mainFrameParent);
 
-      // Get the stage information by casting the stage to a node
-      Stage logForm = (Stage)((Node)e.getSource()).getScene().getWindow();
+            // Get the stage information by casting the stage to a node
+            Stage logForm = (Stage) ((Node) e.getSource()).getScene().getWindow();
 
-      logForm.setScene(scene);
-      logForm.show();  
-     }
-     catch (Exception ex){
-         ex.printStackTrace();
-         ex.getCause();
-     }
+            logForm.setScene(scene);
+            logForm.show();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            ex.getCause();
+        }
     }
-     //------------------ SENDING USER TO ACCOUNT ------------------//
-    public void sendUserToAccountList(ActionEvent e) throws IOException{
+    //------------------ SENDING USER TO ACCOUNT ------------------//
+
+    public void sendUserToAccountList(ActionEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/view/Account.fxml"));
         Parent signupForm = loader.load();
-        
+
         Scene accountDataView = new Scene(signupForm);
         Stage stage = new Stage();
         stage.setScene(accountDataView);
@@ -187,16 +185,15 @@ public class AdminFormController implements Initializable {
         AccountController accControl = loader.getController();
         accControl.addNewUser(signupUser());
         //set textfields in account
-       // accControl.saveAccountData(signupUser());
+
         //show account
         stage.show();
-        
-  }
-   
-    
-  //-------------------CREATE A NEW ACCOUNT-----------------------// 
+
+    }
+
+    //-------------------CREATE A NEW ACCOUNT-----------------------// 
     public Account signupUser() {
-         newUser = new Account();
+        newUser = new Account();
         String fName = sendStringData(getFnTextField());
         String lName = sendStringData(getLnTextField());
         String email = sendStringData(getEmailTextField());
@@ -208,49 +205,51 @@ public class AdminFormController implements Initializable {
         String username = sendStringData(getUsernTextField());
         String pword1 = sendStringData(getPwTextfield1());
         String pword2 = sendStringData(getPwTextfield2());
-         newUser = new Account(fName, lName, weight, height, gender, age, username, pword1, email); 
- //--------------TROUBLE ADDING newUser TO ACCOUNTLIST-----------------------//
-       model.getAccountList().getAccountList().add(newUser);
+        newUser = new Account(fName, lName, weight, height, gender, age, username, pword1, email);
+        //--------------TROUBLE ADDING newUser TO ACCOUNTLIST-----------------------//
+        model.getAccountList().getAccountList().add(newUser);
+        System.out.println("Last Account Name" + model.getAccountList().getAccountList().get(model.getAccountList().getAccountList().size() - 1));
         System.out.println("Account updated");
         //check if passwords are equal
 //        if(pword1.equals(pword2)){
-            
-          
-            System.out.println(newUser.toString());
-           
-       //-------------SEND VIEW TO ACCOUNT----------//    
+
+        System.out.println(newUser.toString());
+
+        //-------------SEND VIEW TO ACCOUNT----------//    
 //             displayAccount();
-             return newUser;
+        return newUser;
 //        }else{
 //            //set pw fields to blank again
 //            pwTextfield1.setText("");
 //            pwTextfield2.setText("");
-        }
-     
- 
-    
+    }
 
     //collect String data from text fields
-    public String sendStringData(TextField object){
-         System.out.println("signup time");
-         String str = object.getText();
-         return str;  
+    public String sendStringData(TextField object) {
+        System.out.println("signup time");
+        String str = object.getText();
+        return str;
     }
+
     // collect int data from TextFields
-    public int sendIntData(TextField number){
-        String str = number.getText();
-        int num = Integer.parseInt(str);
-        return num;
+    public int sendIntData(TextField number) {
+        String str;
+        if (!number.getText().equalsIgnoreCase("")) {
+            str = number.getText();
+            int num = Integer.parseInt(str);
+            return num;
+        } else {
+            return 0;
+        }
     }
+
     //convert int to string
-    public String intToStr(int num){
+    public String intToStr(int num) {
         String str = "" + num;
         return str;
     }
 
-    
-   
-     /**
+    /**
      * @return the lnTextField
      */
     public TextField getLnTextField() {
@@ -418,7 +417,6 @@ public class AdminFormController implements Initializable {
         this.loginLink = loginLink;
     }
 
-   
     /**
      * @return the messageLabel
      */
@@ -533,5 +531,3 @@ public class AdminFormController implements Initializable {
         return controller;
     }
 }
-
-

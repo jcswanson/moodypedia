@@ -32,7 +32,7 @@ public class Model {
       
         for(int i =0;i < accountList.getAccountList().size() ;i++){
             if(accountList.getAccountList().get(i).getPassword().equalsIgnoreCase(pw) && accountList.
-                    getAccountList().get(i).getPassword().equalsIgnoreCase(un))
+                    getAccountList().get(i).getUsername().equalsIgnoreCase(un))
                 
                 return true;
             

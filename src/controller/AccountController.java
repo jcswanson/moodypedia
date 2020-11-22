@@ -97,10 +97,10 @@ public class AccountController implements Initializable {
        
         // create tests that are for debugging using sysout prntln() to make sure data is getting passed around
         
-       // refrf
+       
         newAccount = new Account();
         
-        addNewUser(model.getAccountList().getAccountList().get(1));
+        addNewUser(model.getAccountList().getAccountList().get(model.getAccountList().getAccountList().size()-1));
         saveAccountData();
     }
 
