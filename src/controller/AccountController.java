@@ -94,7 +94,10 @@ public class AccountController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         model = new Model();
         
+       
         // create tests that are for debugging using sysout prntln() to make sure data is getting passed around
+        
+       // refrf
         newAccount = new Account();
         
         addNewUser(model.getAccountList().getAccountList().get(1));

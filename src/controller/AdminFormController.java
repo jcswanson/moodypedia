@@ -40,7 +40,7 @@ import javafx.stage.Stage;
  */
 public class AdminFormController implements Initializable {
 
-    //signup components
+    //signup componentsc c
     @FXML
     private TextField lnTextField;
     @FXML
@@ -94,6 +94,7 @@ public class AdminFormController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
        //------THE ANSWER LIES HERE I THINK------//
        model = new Model();
+       
     }    
 //-------------------------INITIAL SCREEN AFTER LOGGING IN-------------------------------------//
     public void handleLogin(ActionEvent e) throws IOException{
