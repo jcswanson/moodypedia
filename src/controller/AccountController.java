@@ -7,6 +7,9 @@ IST 261 Assignment:
  */
 package controller;
 
+
+import model.AccountList;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -90,19 +93,20 @@ public class AccountController implements Initializable {
     private Model model;
     private AdminFormController afc;
 
-    @Override
+     
+        @Override
     public void initialize(URL url, ResourceBundle rb) {
         model = new Model();
         
-        newAccount = new Account();
         
-        addNewUser(model.getAccountList().getAccountList().get(3));
-        saveAccountData();
+        addNewUser(newAccount);
+        
     }
-
+    
     public void addNewUser(Account newAcc) {
+        
+        newAccount = new Account();
         //assign new user
-        newAccount = newAcc;
         //populate Signup form info to Account form
         fn.setText(newAccount.getFirstName());
         ln.setText(newAccount.getLastName());
@@ -113,10 +117,11 @@ public class AccountController implements Initializable {
         age.setText(Integer.toString(newAccount.getAge()));
         accountWeight.setText(Integer.toString(newAccount.getWeight()));
         accountGender.setText(newAccount.getGender());
-        model.getAccountList().getAccountList().add(model.getAccountList().getAccountList().size(), newAcc);
-        System.out.println();
+        model.getAccountList().getAccountList().add(newAccount);
+        
 
     }
+
 
     public void saveAccountData() {
         // get textfield ints and strings set newAccount fields

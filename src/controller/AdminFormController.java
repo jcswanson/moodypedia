@@ -39,6 +39,8 @@ import javafx.stage.Stage;
  * @author jcswa
  */
 public class AdminFormController implements Initializable {
+    
+    AccountList newAcc;
 
     //signup components
     @FXML
