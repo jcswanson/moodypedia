@@ -8,22 +8,28 @@ IST 261 Assignment:
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Account extends User implements MoveData {
 // Instance Variables -- define your private data
 
-    private String username;
-    private String password;
-    private String email;
+    private StringProperty username = new SimpleStringProperty();
+    private StringProperty password = new SimpleStringProperty();
+    private StringProperty email = new SimpleStringProperty();
+//   Username is test and password is test!    
 
 // Constructors
     public Account(String fn, String ln, int wt, String ht, String g, int ag, String un, String pw, String em) {
 // initialize default values
         super(fn, ln, wt, ht, g, ag);
-        this.username = un;
-        this.password = pw;
-        this.email = em;
+        this.username.set(un);
+        this.password.set(pw);
+        this.email.set(em);
 
     }
 
@@ -36,35 +42,34 @@ public class Account extends User implements MoveData {
     }
 
     public String getUsername() {
-        return username;
+        return username.get();
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.username.set(username);
     }
 
     public String getPassword() {
-        return password;
+        return password.get();
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password.set(password);
     }
 
     public String getEmail() {
-        return email;
+        return email.get();
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email.set(email);
     }
 
-    @Override
-    public ArrayList<String> getAccountData() {
-        ArrayList<String> accData = new ArrayList<>();
-        accData.add(username);
-        accData.add(password);
-        accData.add(email);
+    public ObservableList<String> getAccountData() {
+        ObservableList<String> accData = FXCollections.observableArrayList();
+        accData.add(username.get());
+        accData.add(password.get());
+        accData.add(email.get());
         accData.add(super.getFirstName());
         accData.add(super.getLastName());
         accData.add(super.getGender());
@@ -73,6 +78,16 @@ public class Account extends User implements MoveData {
         accData.add(super.getWeight() + "");
 
         return accData;
+    }
+
+    @Override
+    public ArrayList<String> getAccountData(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void receiveData(ArrayList<String> data) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

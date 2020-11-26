@@ -96,8 +96,13 @@ public class MainFrameFXMLController implements Initializable {
     
     QuestionList QL;
     
+    public MainFrameFXMLController(){
+        
+    }
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -115,12 +120,12 @@ public class MainFrameFXMLController implements Initializable {
       //q3.setText(SC.getSettingsQuestionThree().getText());
       //q4.setText(SC.getSettingsQuestionFour().getText());
       //q5.setText(SC.getSettingsQuestionFive().getText());
-      
-      q1.setText(QL.getQuestionList().get(0));
-      q2.setText(QL.getQuestionList().get(1));
-      q3.setText(QL.getQuestionList().get(2));
-      q4.setText(QL.getQuestionList().get(3));
-      q5.setText(QL.getQuestionList().get(4));
+//      
+//      q1.setText(QL.getQuestionList().get(0));
+//      q2.setText(QL.getQuestionList().get(1));
+//      q3.setText(QL.getQuestionList().get(2));
+//      q4.setText(QL.getQuestionList().get(3));
+//      q5.setText(QL.getQuestionList().get(4));
       
        
     }
@@ -138,19 +143,19 @@ public class MainFrameFXMLController implements Initializable {
         
         accountWindow.setScene(scene);
         accountWindow.show();  
-         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/view/Account.fxml"));
-        Parent signupForm = loader.load();
-        
-        Scene accountDataView = new Scene(signupForm);
-        Stage stage = new Stage();
-        stage.setScene(accountDataView);
-        //access Account Controller and send signup data to Textfields
-        
-        AccountController accControl = loader.getController();
-        accControl.saveAccountData();
-        stage.show();
-        
+//         FXMLLoader loader = new FXMLLoader();
+//        loader.setLocation(getClass().getResource("/view/Account.fxml"));
+//        Parent signupForm = loader.load();
+//        
+//        Scene accountDataView = new Scene(signupForm);
+//        Stage stage = new Stage();
+//        stage.setScene(accountDataView);
+//        //access Account Controller and send signup data to Textfields
+//        
+//        AccountController accControl = loader.getController();
+//        accControl.saveAccountData();
+//        stage.show();
+//        
        
         
     }
@@ -272,3 +277,4 @@ public class MainFrameFXMLController implements Initializable {
     }
  
 }
+

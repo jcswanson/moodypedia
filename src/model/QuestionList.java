@@ -10,40 +10,39 @@ package model;
 
 
 import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class QuestionList{
 // Instance Variables -- define your private data
-
-    Question question;
     
-    private ArrayList<String>questionList;
+    private ObservableList<Question>questionList;
 
 
     // Constructors
-    public QuestionList(ArrayList<String>questionList){
+    public QuestionList(){
     // initialize default values
-    this.questionList = questionList;
-    questionList.add(question.getQuestionOne());
-    questionList.add(question.getQuestionTwo());
-    questionList.add(question.getQuestionThree());
-    questionList.add(question.getQuestionFour());
-    questionList.add(question.getQuestionFive());
+    this.questionList = FXCollections.observableArrayList();
+    questionList.add(new Question());
+    questionList.add(new Question());
+    questionList.add(new Question());
+    questionList.add(new Question());
+    questionList.add(new Question());
 
 }
-    public QuestionList(){
-}
+
 
     /**
      * @return the questionList
      */
-    public ArrayList<String> getQuestionList() {
+    public ObservableList<Question> getQuestionList() {
         return questionList;
     }
 
     /**
      * @param questionList the questionList to set
      */
-    public void setQuestionList(ArrayList<String> questionList) {
+    public void setQuestionList(ObservableList<Question> questionList) {
         this.questionList = questionList;
     }
 

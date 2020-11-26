@@ -21,7 +21,7 @@ import model.Model;
  */
 public class AppFX extends Application {
        
-    
+//   Username is test and password is test!    
 
     @Override
     public void start(Stage stage) throws Exception {

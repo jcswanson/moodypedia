@@ -21,6 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -29,6 +30,8 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TitledPane;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -40,6 +43,8 @@ import javafx.stage.Stage;
 public class AdminFormController implements Initializable {
 
     //signup componentsc c
+    @FXML
+    private AnchorPane signupFormID;
     @FXML
     private TextField lnTextField;
     @FXML
@@ -85,8 +90,11 @@ public class AdminFormController implements Initializable {
     //App Data Access
     private Model model;
     private Controller controller;
-    private Account newUser;
+    private Account account;
 
+    public AdminFormController(){
+        
+    }
     /**
      * Initializes the controller class.
      */
@@ -94,6 +102,8 @@ public class AdminFormController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         //------THE ANSWER LIES HERE I THINK------//
         model = new Model();
+
+        account = new Account();
 
     }
 //-------------------------INITIAL SCREEN AFTER LOGGING IN-------------------------------------//
@@ -120,7 +130,7 @@ public class AdminFormController implements Initializable {
     //--------------------------DISPLAY SIGNUP FORM------------------------------------------//
     public void displaySignupForm(ActionEvent e) throws IOException {
         System.out.println("Signup Button Clicked");
-        newUser = new Account();
+        account = new Account();
         Parent mainFrameParent = FXMLLoader.load(getClass().getResource("/view/SignupForm.fxml"));
         Scene scene = new Scene(mainFrameParent);
 
@@ -193,7 +203,7 @@ public class AdminFormController implements Initializable {
 
     //-------------------CREATE A NEW ACCOUNT-----------------------// 
     public Account signupUser() {
-        newUser = new Account();
+        account = new Account();
         String fName = sendStringData(getFnTextField());
         String lName = sendStringData(getLnTextField());
         String email = sendStringData(getEmailTextField());
@@ -205,19 +215,19 @@ public class AdminFormController implements Initializable {
         String username = sendStringData(getUsernTextField());
         String pword1 = sendStringData(getPwTextfield1());
         String pword2 = sendStringData(getPwTextfield2());
-        newUser = new Account(fName, lName, weight, height, gender, age, username, pword1, email);
-        //--------------TROUBLE ADDING newUser TO ACCOUNTLIST-----------------------//
-        model.getAccountList().getAccountList().add(newUser);
+        account = new Account(fName, lName, weight, height, gender, age, username, pword1, email);
+        //--------------TROUBLE ADDING account TO ACCOUNTLIST-----------------------//
+        model.getAccountList().getAccountList().add(account);
         System.out.println("Last Account Name" + model.getAccountList().getAccountList().get(model.getAccountList().getAccountList().size() - 1));
         System.out.println("Account updated");
         //check if passwords are equal
 //        if(pword1.equals(pword2)){
 
-        System.out.println(newUser.toString());
+        System.out.println(account.toString());
 
         //-------------SEND VIEW TO ACCOUNT----------//    
 //             displayAccount();
-        return newUser;
+        return account;
 //        }else{
 //            //set pw fields to blank again
 //            pwTextfield1.setText("");
@@ -515,12 +525,12 @@ public class AdminFormController implements Initializable {
         this.title = title;
     }
 
-    public Account getNewUser() {
-        return newUser;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setNewUser(Account newUser) {
-        this.newUser = newUser;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public Model getModel() {

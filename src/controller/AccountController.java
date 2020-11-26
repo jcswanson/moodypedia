@@ -35,7 +35,7 @@ public class AccountController implements Initializable {
      * @param url
      */
     private Account newAccount;
-
+    
     @FXML
     private TitledPane accountTitle;
     @FXML
@@ -86,24 +86,32 @@ public class AccountController implements Initializable {
     private ImageView accountLogo;
     @FXML
     private Button returnButton;
-
-    private Model model;
+    @FXML
     private AdminFormController afc;
-
+    
+    private Model model;
+    
+    public AccountController(){
+        
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         model = new Model();
-        
-       
-        // create tests that are for debugging using sysout prntln() to make sure data is getting passed around
-        
-       
         newAccount = new Account();
+        //   Username is test and password is test!    
+        fn.setText(model.getAccountList().getLastAccount().getFirstName());
+        ln.setText(model.getAccountList().getLastAccount().getLastName());
+        email.setText(model.getAccountList().getLastAccount().getEmail());
+        un.setText(model.getAccountList().getLastAccount().getUsername());
+        pw.setText(model.getAccountList().getLastAccount().getPassword());
+        accountGender.setText(model.getAccountList().getLastAccount().getGender());
+        height.setText(model.getAccountList().getLastAccount().getHeight());
+        accountWeight.setText(model.getAccountList().getLastAccount().getWeightString());
+        age.setText(model.getAccountList().getLastAccount().getAgeString());
         
-        addNewUser(model.getAccountList().getAccountList().get(model.getAccountList().getAccountList().size()-1));
-        saveAccountData();
+        
     }
-
+    @FXML
     public void addNewUser(Account newAcc) {
         //assign new user
         newAccount = newAcc;
@@ -117,36 +125,37 @@ public class AccountController implements Initializable {
         age.setText(Integer.toString(newAccount.getAge()));
         accountWeight.setText(Integer.toString(newAccount.getWeight()));
         accountGender.setText(newAccount.getGender());
-        model.getAccountList().getAccountList().add(model.getAccountList().getAccountList().size(), newAcc);
+        model.getAccountList().addAccount(newAccount);
         System.out.println();
-
+        
     }
-
+    @FXML
     public void saveAccountData() {
         // get textfield ints and strings set newAccount fields
 
-        newAccount.setFirstName(getFn().getText());
-        newAccount.setLastName(getLn().getText());
-        newAccount.setEmail(getEmail().getText());
-        int age;
-        age = sendIntData(getAge());
-        newAccount.setAge(age);
-        newAccount.setHeight(getHeight().getText());
-        int wgt = sendIntData(getAccountWeight());
-        newAccount.setWeight(wgt);
-        newAccount.setGender(getAccountGender().getText());
-        newAccount.setUsername(getUn().getText());
-        newAccount.setPassword(getPw().getText());
-        //setTextfields in account view
-        addNewUser(newAccount);
-        getModel().getAccountList().getAccountList().add(newAccount);
-   
+        model.getAccountList().getLastAccount().setFirstName(getFn().getText());
+        model.getAccountList().getLastAccount().setLastName(getLn().getText());
+        model.getAccountList().getLastAccount().setEmail(getEmail().getText());
+        if(!age.getText().equalsIgnoreCase("")){
+            model.getAccountList().getLastAccount().setAge(0);
+        }else{ 
+            model.getAccountList().getLastAccount().setAgeString(age.getText());
+        }
+        if(!accountWeight.getText().equalsIgnoreCase("")){
+            model.getAccountList().getLastAccount().setWeight(0);
+        }else{
+            model.getAccountList().getLastAccount().setWeightString(accountWeight.getText());
+        }
+        model.getAccountList().getLastAccount().setGender(accountGender.getText());
+        model.getAccountList().getLastAccount().setHeight(height.getText());
+        model.getAccountList().getLastAccount().setUsername(un.getText());
+        model.getAccountList().getLastAccount().setPassword(pw.getText());
+       
     } //-------------------RETURN BUTTON METHOD---------------------------//
-
 
     public void returnToMainFrame(ActionEvent e) throws IOException {
         System.out.println("Return to MainFrame");
-
+        
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/view/MainFrame.fxml"));
         Parent mf = loader.load();
@@ -156,7 +165,6 @@ public class AccountController implements Initializable {
         mfWindow.setScene(scene);
         mfWindow.show();
     }
-    
 
     //collect String data from text fields
     public String sendStringData(TextField object) {
@@ -177,7 +185,7 @@ public class AccountController implements Initializable {
         String str = "" + num;
         return str;
     }
-
+    
     public void setAccountField(String str) {
         fn.setText(str);
     }
@@ -531,15 +539,15 @@ public class AccountController implements Initializable {
     public void setReturnButton(Button returnButton) {
         this.returnButton = returnButton;
     }
-
+    
     public Account getNewAccount() {
         return newAccount;
     }
-
+    
     public Model getModel() {
         return model;
     }
-
+    
     public AdminFormController getAfc() {
         return afc;
     }

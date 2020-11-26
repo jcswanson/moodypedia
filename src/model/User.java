@@ -8,62 +8,90 @@ IST 261 Assignment:
 package model;
 
 import java.util.logging.Logger;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class User {
 // Instance Variables -- define your private data
 
-    private String firstName;
-    private String lastName;
-    private int weight;
-    private String height;
-    private String gender;
-    private int age;
+    private StringProperty firstName = new SimpleStringProperty();
+    private StringProperty lastName= new SimpleStringProperty();
+    private IntegerProperty weight= new SimpleIntegerProperty();
+    private StringProperty height= new SimpleStringProperty();
+    private StringProperty gender= new SimpleStringProperty();
+    private IntegerProperty age= new SimpleIntegerProperty();
 
 // Constructors
     public User(String fn, String ln, int wt, String ht, String g, int ag) {
 // initialize default values
-        this.firstName = fn;
-        this.lastName = ln;
-        this.weight = wt;
-        this.height = ht;
-        this.gender = g;
-        this.age = ag;
+        this.firstName.set(fn);
+        this.lastName.set(ln);
+        this.weight.set(wt);
+        this.height.set(ht);
+        this.gender.set(g);
+        this.age.set(ag);
 
     }
 
     public User() {
     }
 
-    public String getFirstName() {
+    public StringProperty firstNameProperty() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
+    public StringProperty lastNameProperty() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public int getWeight() {
+    public IntegerProperty weightProperty() {
         return weight;
     }
 
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
-    public String getHeight() {
+    public StringProperty heightProperty() {
         return height;
     }
 
+    public StringProperty genderProperty() {
+        return gender;
+    }
+
+    public IntegerProperty ageProperty() {
+        return age;
+    }
+
+    public String getFirstName() {
+        return firstName.get();
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName.set(firstName);
+    }
+
+    public String getLastName() {
+        return lastName.get();
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName.set(lastName);
+    }
+
+    public int getWeight() {
+        return weight.get();
+    }
+
+    public void setWeight(int weight) {
+        this.weight.set(weight);
+    }
+
+    public String getHeight() {
+        return height.get();
+    }
+
     public void setHeight(String height) {
-        this.height = height;
+        this.height.set(height);
     }
 
     @Override
@@ -72,19 +100,36 @@ public class User {
     }
 
     public String getGender() {
-        return gender;
+        return gender.get();
     }
 
     public void setGender(String gender) {
-        this.gender = gender;
+        this.gender.set(gender);
     }
 
     public int getAge() {
-        return age;
+        return age.get();
     }
 
     public void setAge(int age) {
-        this.age = age;
+        this.age.set(age);
+    }
+
+    public String getAgeString() {
+        return this.age + "";
+    }
+
+    public String getWeightString() {
+        return weight + "";
+
+    }
+
+    public void setAgeString(String ageStr) {
+        this.age.set(Integer.parseInt(ageStr));
+    }
+
+    public void setWeightString(String wgtStr) {
+        this.weight.set(Integer.parseInt(wgtStr));
     }
     private static final Logger LOG = Logger.getLogger(User.class.getName());
 

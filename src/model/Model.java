@@ -17,7 +17,7 @@ public class Model {
     private AccountList accountList;
 // Constructors 
     public Model() {
-        accountList = new AccountList();
+         accountList = new AccountList();
 
     }
    

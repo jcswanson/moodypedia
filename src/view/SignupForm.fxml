@@ -15,8 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="633.0" styleClass="signupFormBg" stylesheets="@SignupFormStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminFormController">
+<AnchorPane id="signupAnchor" fx:id="signupFormID" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="633.0" styleClass="signupFormBg" stylesheets="@SignupFormStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminFormController">
    <children>
       <VBox alignment="CENTER" layoutX="38.0" layoutY="31.0" spacing="10.0" styleClass="signupFormStyle" stylesheets="@SignupFormStyle.css">
          <children>
@@ -41,7 +40,6 @@
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <TextField fx:id="wgtTextField" style="-fx-border-radius: 9;" GridPane.columnIndex="4" GridPane.rowIndex="2" />
                   <Label text="Gender:" GridPane.rowIndex="3" />
                   <Label text="Weight:" GridPane.columnIndex="3" GridPane.rowIndex="2">
                      <padding>
@@ -61,13 +59,13 @@
                      </padding>
                   </Label>
                   <Label text="First Name:" />
-                  <TextField id="fnTextField" fx:id="fnTextField" style="-fx-border-radius: 9;" GridPane.columnIndex="1" />
+                  <TextField id="fnTextField" fx:id="wgtTextField" style="-fx-border-radius: 9;" GridPane.columnIndex="4" GridPane.rowIndex="2" />
                   <TextField fx:id="htTextField" style="-fx-border-radius: 9;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <TextField fx:id="ageTextField" style="-fx-border-radius: 9;" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                   <TextField fx:id="lnTextField" style="-fx-border-radius: 9;" GridPane.columnIndex="4" />
-                  <TextField fx:id="lnTextField" GridPane.columnIndex="4" />
                   <TextField fx:id="emailTextField" style="-fx-border-radius: 9;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="gendTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="fnTextField" style="-fx-border-radius: 9;" GridPane.columnIndex="1" />
                </children>
             </GridPane>
             <Separator prefHeight="2.0" prefWidth="506.0" />

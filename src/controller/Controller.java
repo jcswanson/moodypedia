@@ -4,15 +4,16 @@ Short description:
 IST 261 Assignment:
 @author jcswa
 @version 1.01 Nov 4, 2020
-*/
-
+ */
 package controller;
 
 import model.Model;
 
-public class Controller{
+public class Controller {
 // Instance Variables -- define your private data
-Model model;
+
+    Model model;
+//   Username is test and password is test!    
 
     public Model getModel() {
         return model;
@@ -22,10 +23,9 @@ Model model;
         this.model = model;
     }
 
-
 // Constructors
-public Controller(Model model){
-    this.model = model;
-}
+    public Controller(Model model) {
+        this.model = model;
+    }
 
 }
